@@ -1,4 +1,6 @@
 test:
+	cp overwrite/Makefile ../os/Makefile
+	cp overwrite/pack.py ../os/pack.py
 ifeq ($(CHAPTER), 3)
 	make -C user all CHAPTER=3_0
 	make -C ../os clean
