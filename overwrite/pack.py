@@ -31,8 +31,8 @@ _app_names:
     for (idx, app) in enumerate(apps):
         f.write(
             '''
-    .section .data.app{0}
     .global app_{0}_start
+    .align 8
 app_{0}_start:
     .incbin "{1}"
 '''.format(idx, TARGET_DIR + app)
