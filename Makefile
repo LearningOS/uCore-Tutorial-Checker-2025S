@@ -1,6 +1,13 @@
 test:
 	cp overwrite/Makefile ../os/Makefile
 	cp overwrite/pack.py ../os/pack.py
+ifeq ($(CHAPTER), 5)
+	sed -i 's/int id = get_id_by_name(.*)/int id = get_id_by_name("ch5_usertest.bin")/g' ../os/loader.c
+else ifeq ($(CHAPTER), 6)
+	sed -i 's/int id = get_id_by_name(.*)/int id = get_id_by_name("ch6_usertest.bin")/g' ../os/loader.c
+else ifeq ($(CHAPTER), 7)
+	sed -i 's/int id = get_id_by_name(.*)/int id = get_id_by_name("ch7_usertest.bin")/g' ../os/loader.c
+endif
 ifeq ($(CHAPTER), 3)
 	make -C user all CHAPTER=3_0
 	make -C ../os clean
