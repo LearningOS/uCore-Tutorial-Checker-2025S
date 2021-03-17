@@ -1,4 +1,10 @@
-test:
+RAND := $(shell awk 'BEGIN{srand();printf("%d", 65536*rand())}')
+
+randomize:
+	find user/src -name "*.c" | xargs sed -i 's/OK/OK$(RAND)/g'
+	find check -name "*.py" | xargs sed -i 's/OK/OK$(RAND)/g'
+
+test: randomize
 	cp overwrite/Makefile ../os/Makefile
 	cp overwrite/pack.py ../os/pack.py
 ifeq ($(CHAPTER), 5)
