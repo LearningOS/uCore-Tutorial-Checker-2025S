@@ -1,15 +1,16 @@
 import base
 import ch2
-import ch3_0
+from ch3_0 import EXPECTED, NOT_EXPECTED
 
-EXPECTED = ch2.EXPECTED + ch3_0.EXPECTED + [
+
+EXPECTED += [
     "Test 04_1 OK!",
     "Test 04_4 test OK!",
     "Test 04_5 ummap OK!",
     "Test 04_6 ummap2 OK!",
 ]
 
-NOT_EXPECTED = [
+NOT_EXPECTED += [
     "Should cause error, Test 04_2 fail!",
 ]
 
