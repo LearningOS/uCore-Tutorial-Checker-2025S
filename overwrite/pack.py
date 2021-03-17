@@ -26,7 +26,7 @@ _app_names:
 ''')
 
     for app in apps:
-        f.write("   .string \"" + app + "\"\n")
+        f.write("   .string \"" + app[:-4] + "\"\n")
 
     for (idx, app) in enumerate(apps):
         f.write(
