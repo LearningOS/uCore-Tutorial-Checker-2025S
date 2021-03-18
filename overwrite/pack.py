@@ -32,7 +32,7 @@ _app_names:
         f.write(
             '''
     .global app_{0}_start
-    .align 8
+    .align 12
 app_{0}_start:
     .incbin "{1}"
 '''.format(idx, TARGET_DIR + app)
