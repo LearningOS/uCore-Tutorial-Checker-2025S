@@ -41,11 +41,8 @@ int main() {
     fstat(fd, &stat2);
     assert(stat2.nlink == 1);
     close(fd);
-<<<<<<< HEAD
     unlink(lname0);
     // It's Ok if you don't delete the inode and data blocks.
-=======
->>>>>>> fdeb87e070a905b553ba56655029602492bcda5c
     puts("Test link OK!");
     return 0;
 }
