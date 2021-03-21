@@ -57,4 +57,4 @@ QEMUOPTS = \
 	-kernel kernel
 
 run: kernel
-	timeout 30s $(QEMU) $(QEMUOPTS)
+	timeout --foreground 30s $(QEMU) $(QEMUOPTS)
