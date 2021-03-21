@@ -1,6 +1,7 @@
 ARCH ?= riscv64
 MODE ?= release
 CHAPTER ?=
+app_dir = src
 src_dir := build/$(ARCH)
 bin_dir := build/bin
 out_dir := target
