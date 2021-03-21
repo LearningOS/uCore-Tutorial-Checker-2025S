@@ -16,8 +16,11 @@ int main() {
     assert(stat.mode == FILE);
     assert(stat.nlink == 1);
     close(fd);
+<<<<<<< HEAD
     // unlink(fname);
     // It's recommended to rebuild the disk image. This program will not clean the file "fname1".
+=======
+>>>>>>> fdeb87e070a905b553ba56655029602492bcda5c
     puts("Test fstat OK!");
     return 0;
 }
