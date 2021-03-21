@@ -12,6 +12,8 @@ Test write1 OK!""",
 
 TEMP = [
     """Test write0 OK!""",
+    """Test hello_world OK!""",
+    """Test write1 OK!""",
 ]
 
 NOT_EXPECTED = [
