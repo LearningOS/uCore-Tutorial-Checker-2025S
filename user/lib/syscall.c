@@ -1,7 +1,9 @@
 #include <stddef.h>
 #include <unistd.h>
-
 #include "syscall.h"
+
+void __write_buffer();
+void __clear_buffer();
 
 int open(const char *path, int flags)
 {
@@ -10,6 +12,10 @@ int open(const char *path, int flags)
 
 int close(int fd)
 {
+    if(fd == 1) {
+        __write_buffer();
+        __clear_buffer();
+    }
     return syscall(SYS_close, fd);
 }
 
@@ -40,6 +46,8 @@ int fork(void)
 
 void exit(int code)
 {
+    __write_buffer();
+    __clear_buffer();
     syscall(SYS_exit, code);
 }
 
