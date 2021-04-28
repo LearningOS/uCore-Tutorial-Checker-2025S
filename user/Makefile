@@ -66,9 +66,14 @@ pre:
 	@mkdir -p $(out_dir)/bin/
 	@mkdir -p $(out_dir)/elf/
 
-all: binary pre
+bin: binary pre
 	@$(foreach t, $(CH_TESTS), cp $(bin_dir)/$(t)* $(out_dir)/bin/;)
 	@$(foreach t, $(CH_TESTS), cp $(src_dir)/$(t)* $(out_dir)/elf/;)
+
+NFS := ../../nfs
+
+all: bin $(NFS)/fs
+	$(NFS)/fs fs.img $(wildcard $(out_dir)/*.bin)
 
 clean:
 	@rm -rf build target asm

@@ -19,7 +19,6 @@ EXPECTED = [
     "Test write A OK!",
     "Test write B OK!",
     "Test write C OK!",
-
 ]
 
 if __name__ == '__main__':

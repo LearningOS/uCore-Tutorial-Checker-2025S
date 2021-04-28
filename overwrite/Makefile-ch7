@@ -37,6 +37,8 @@ kernel: $(OBJS) link_app.S
 clean: 
 	rm -f *.o *.d kernel *.sym *.asm link_app.S
 
+U = ../riscvos-c-tests/user
+
 ifndef CPUS
 CPUS := 1
 endif
@@ -52,7 +54,10 @@ QEMUOPTS = \
 	-smp $(CPUS) \
 	-machine virt \
 	-bios $(BOOTLOADER) \
-	-kernel kernel
+	-kernel kernel \
+	-drive file=$(U)/fs-copy.img,if=none,format=raw,id=x0 \
+    -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
 
 run: kernel
+	$(CP) $(U)/fs.img $(U)/fs-copy.img
 	timeout --foreground 30s $(QEMU) $(QEMUOPTS)
