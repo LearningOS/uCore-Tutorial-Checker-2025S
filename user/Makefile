@@ -73,6 +73,7 @@ bin: binary pre
 NFS := ../../nfs
 
 all: bin $(NFS)/fs
+	chmod +x $(NFS)/fs
 	$(NFS)/fs fs.img $(wildcard $(out_dir)/*.bin)
 
 clean:
