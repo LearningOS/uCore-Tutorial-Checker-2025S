@@ -11,7 +11,11 @@ test: randomize
 ifeq ($(CHAPTER), 7)
 	cp overwrite/Makefile-ch7 $(DIR)/Makefile
 endif
-ifeq ($(CHAPTER), 3)
+ifeq ($(CHAPTER), 1)
+	echo `no ci for ch1`
+else ifeq ($(CHAPTER), 2)
+	echo `no ci for ch2`
+else ifeq ($(CHAPTER), 3)
 	make -C $(DIR) clean
 	make -C $(DIR) test CHAPTER=3 BASE=0 | tee stdout-ch3
 	python3 check/ch3.py < stdout-ch3
