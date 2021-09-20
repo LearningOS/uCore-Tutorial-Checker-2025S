@@ -1,6 +1,16 @@
 import base
+from ch2 import EXPECTED, NOT_EXPECTED, TEMP
 
-EXPECTED = [
+EXPECTED += [
+    "Test set_priority OK!",
+    r"get_time OK! (\d+)",
+    "Test sleep OK!",
+    r"current time_msec = (\d+)",
+    r"time_msec = (\d+) after sleeping (\d+) ticks, delta = (\d+)ms!",
+    "Test sleep1 passed!",
+]
+
+EXPECTED += [
     "AAAAAAAAAA [1/5]",
     "BBBBBBBBBB [1/5]",
     "CCCCCCCCCC [1/5]",
@@ -21,6 +31,6 @@ EXPECTED = [
     "Test write C OK!",
 ]
 
-if __name__ == '__main__':
-    base.test_str(EXPECTED)
 
+if __name__ == '__main__':
+    base.test(EXPECTED + TEMP, NOT_EXPECTED)

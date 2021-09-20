@@ -1,21 +1,53 @@
-SRCS = $(wildcard *.S *.c)
-OBJS = $(addsuffix .o, $(basename $(SRCS))) link_app.o
+.PHONY: clean build user
+all: build_kernel
 
-# Try to infer the correct TOOLPREFIX if not set
+K = os
+
 TOOLPREFIX = riscv64-unknown-elf-
 CC = $(TOOLPREFIX)gcc
-AS = $(TOOLPREFIX)gas
+AS = $(TOOLPREFIX)gcc
 LD = $(TOOLPREFIX)ld
 OBJCOPY = $(TOOLPREFIX)objcopy
 OBJDUMP = $(TOOLPREFIX)objdump
 PY = python3
+GDB = $(TOOLPREFIX)gdb
+CP = cp
+BUILDDIR = build
+C_SRCS = $(wildcard $K/*.c)
+AS_SRCS = $(wildcard $K/*.S)
+C_OBJS = $(addprefix $(BUILDDIR)/, $(addsuffix .o, $(basename $(C_SRCS))))
+AS_OBJS = $(addprefix $(BUILDDIR)/, $(addsuffix .o, $(basename $(AS_SRCS))))
+OBJS = $(C_OBJS) $(AS_OBJS)
+
+HEADER_DEP = $(addsuffix .d, $(basename $(C_OBJS)))
+
+ifeq (,$(findstring link_app.o,$(OBJS)))
+	AS_OBJS += $(BUILDDIR)/$K/link_app.o
+endif
+
+-include $(HEADER_DEP)
 
 CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb
 CFLAGS += -MD
 CFLAGS += -mcmodel=medany
 CFLAGS += -ffreestanding -fno-common -nostdlib -mno-relax
-CFLAGS += -I.
+CFLAGS += -I$K
 CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
+
+
+LOG ?= error
+
+ifeq ($(LOG), error)
+CFLAGS += -D LOG_LEVEL_ERROR
+else ifeq ($(LOG), warn)
+CFLAGS += -D LOG_LEVEL_WARN
+else ifeq ($(LOG), info)
+CFLAGS += -D LOG_LEVEL_INFO
+else ifeq ($(LOG), debug)
+CFLAGS += -D LOG_LEVEL_DEBUG
+else ifeq ($(LOG), trace)
+CFLAGS += -D LOG_LEVEL_TRACE
+endif
 
 # Disable PIE when possible (for Ubuntu 16.10 toolchain)
 ifneq ($(shell $(CC) -dumpspecs 2>/dev/null | grep -e '[^f]no-pie'),)
@@ -27,32 +59,69 @@ endif
 
 LDFLAGS = -z max-page-size=4096
 
-link_app.o: link_app.S
-link_app.S: pack.py
-	@$(PY) pack.py
+$(AS_OBJS): $(BUILDDIR)/$K/%.o : $K/%.S
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-kernel: $(OBJS) link_app.S
-	$(LD) $(LDFLAGS) -T kernel.ld -o kernel $(OBJS)
+$(C_OBJS): $(BUILDDIR)/$K/%.o : $K/%.c  $(BUILDDIR)/$K/%.d
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-clean: 
-	rm -f *.o *.d kernel *.sym *.asm link_app.S
+$(HEADER_DEP): $(BUILDDIR)/$K/%.d : $K/%.c
+	@mkdir -p $(@D)
+	@set -e; rm -f $@; $(CC) -MM $< $(INCLUDEFLAGS) > $@.$$$$; \
+        sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+        rm -f $@.$$$$
 
-ifndef CPUS
-CPUS := 1
-endif
+os/link_app.o: $K/link_app.S
+os/link_app.S: scripts/pack.py
+	@$(PY) scripts/pack.py
+os/kernel_app.ld: scripts/kernelld.py
+	@$(PY) scripts/kernelld.py
+
+build: build/kernel
+
+build/kernel: $(OBJS) os/kernel_app.ld
+	$(LD) $(LDFLAGS) -T os/kernel_app.ld -o $(BUILDDIR)/kernel $(OBJS)
+	$(OBJDUMP) -S $(BUILDDIR)/kernel > $(BUILDDIR)/kernel.asm
+	$(OBJDUMP) -t $(BUILDDIR)/kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' > $(BUILDDIR)/kernel.sym
+	@echo 'Build kernel done'
+
+clean:
+	rm -rf $(BUILDDIR) os/kernel_app.ld os/link_app.S
+	make -C user clean
 
 # BOARD
 BOARD		?= qemu
 SBI			?= rustsbi
-BOOTLOADER	:= ../bootloader/$(SBI)-$(BOARD).bin
+BOOTLOADER	:= ./bootloader/rustsbi-qemu.bin
 
 QEMU = qemu-system-riscv64
 QEMUOPTS = \
 	-nographic \
-	-smp $(CPUS) \
 	-machine virt \
 	-bios $(BOOTLOADER) \
-	-kernel kernel
+	-kernel build/kernel	\
 
-run: kernel
-	timeout --foreground 30s $(QEMU) $(QEMUOPTS)
+run: build/kernel
+	$(QEMU) $(QEMUOPTS)
+
+# QEMU's gdb stub command line changed in 0.11
+QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \
+	then echo "-gdb tcp::15234"; \
+	else echo "-s -p 15234"; fi)
+
+debug: build/kernel .gdbinit
+	$(QEMU) $(QEMUOPTS) -S $(QEMUGDB) &
+	sleep 1
+	$(GDB)
+
+CHAPTER ?= $(shell git rev-parse --abbrev-ref HEAD | grep -oP 'ch\K[0-9]')
+
+BASE ?= 0
+
+user:
+	make -C user CHAPTER=$(CHAPTER) BASE=$(BASE)
+
+test: user run
+

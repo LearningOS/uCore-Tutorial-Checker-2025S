@@ -2,9 +2,9 @@ import base
 from ch4 import EXPECTED, NOT_EXPECTED
 
 EXPECTED += [
-    r"Test getpid OK! pid = (\d+)",
-    "Test spawn0 OK!",
+    "Test many spawn OK!",
     "Test wait OK!",
+    "Test ppid OK!",
     "Test waitpid OK!",
 ]
 
