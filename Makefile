@@ -2,7 +2,7 @@ RAND := $(shell awk 'BEGIN{srand();printf("%d", 65536*rand())}')
 DIR := workplace
 
 randomize:
-	find user/src -name "*.c" | xargs sed -i 's/OK/OK$(RAND)/g'
+	find $(DIR)/user/src -name "*.c" | xargs sed -i 's/OK/OK$(RAND)/g'
 	find check -name "*.py" | xargs sed -i 's/OK/OK$(RAND)/g'
 
 test: randomize
