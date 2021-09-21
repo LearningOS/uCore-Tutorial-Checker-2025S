@@ -88,8 +88,8 @@ build/kernel: $(OBJS) os/kernel_app.ld
 	@echo 'Build kernel done'
 
 clean:
-	rm -rf $(BUILDDIR) os/kernel_app.ld os/link_app.S
-	make -C user clean
+	rm -rf $(BUILDDIR) os/kernel_app.ld os/link_app.S || true
+	make -C user clean || true
 
 # BOARD
 BOARD		?= qemu

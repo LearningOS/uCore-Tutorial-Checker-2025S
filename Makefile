@@ -6,6 +6,7 @@ randomize:
 	find check -name "*.py" | xargs sed -i 's/OK/OK$(RAND)/g'
 
 test: randomize
+	mkdir -p $(DIR)/os
 	cp ../os/* $(DIR)/os/
 	cp overwrite/Makefile $(DIR)/Makefile
 ifeq ($(CHAPTER), 7)
