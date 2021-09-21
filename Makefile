@@ -11,7 +11,7 @@ test: randomize
 ifeq ($(CHAPTER), 7)
 	cp overwrite/Makefile-ch7 $(DIR)/Makefile
 endif
-ifeq ($(CHAPTER), 1)
+ifeq ($(CHAPTER), 1)	
 	echo `no ci for ch1`
 else ifeq ($(CHAPTER), 2)
 	echo `no ci for ch2`

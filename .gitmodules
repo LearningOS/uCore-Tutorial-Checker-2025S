@@ -1,0 +1,4 @@
+
+[submodule "uCore-Tutorial-Tests"]
+	path = workplace/user
+	url = https://github.com/DeathWish5/uCore-Tutorial-Tests
