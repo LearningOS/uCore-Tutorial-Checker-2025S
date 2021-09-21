@@ -8,9 +8,6 @@ EXPECTED += [
     r"current time_msec = (\d+)",
     r"time_msec = (\d+) after sleeping (\d+) ticks, delta = (\d+)ms!",
     "Test sleep1 passed!",
-]
-
-EXPECTED += [
     "AAAAAAAAAA [1/5]",
     "BBBBBBBBBB [1/5]",
     "CCCCCCCCCC [1/5]",
@@ -30,7 +27,6 @@ EXPECTED += [
     "Test write B OK!",
     "Test write C OK!",
 ]
-
 
 if __name__ == '__main__':
     base.test(EXPECTED + TEMP, NOT_EXPECTED)
