@@ -4,7 +4,7 @@ from ch3 import EXPECTED, NOT_EXPECTED
 
 
 EXPECTED += [
-    "Test 04_1 OK!",
+    "Test 04_0 OK!",
     "Test 04_3 test OK!",
     "Test 04_4 ummap OK!",
     "Test 04_5 ummap2 OK!",
