@@ -24,10 +24,9 @@ else ifeq ($(CHAPTER), 3)
 	make -C $(DIR) clean
 	make -C $(DIR) test CHAPTER=3t BASE=0 | tee stdout-ch3t
 	python3 check/ch3t.py < stdout-ch3t
-
 else
 	make -C $(DIR) clean
-	make -C $(DIR) test CHAPTER=$(CHAPTER) BASE=0 | tee stdout-ch$(CHAPTER)
+	make -C $(DIR) test CHAPTER=$(CHAPTER) BASE=0 INIT_PROC=ch$(CHAPTER)_usertest | tee stdout-ch$(CHAPTER)
 	python3 check/ch$(CHAPTER).py < stdout-ch$(CHAPTER)
 endif
 
