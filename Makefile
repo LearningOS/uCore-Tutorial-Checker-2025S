@@ -11,6 +11,7 @@ test: randomize
 	cp overwrite/Makefile $(DIR)/Makefile
 ifeq ($(CHAPTER), 7)
 	cp overwrite/Makefile-ch7 $(DIR)/Makefile
+	mkdir -p $(DIR)/nfs
 	cp ../nfs/* $(DIR)/nfs/
 endif
 ifeq ($(CHAPTER), 1)	
