@@ -1,4 +1,3 @@
-
-[submodule "uCore-Tutorial-Tests"]
+[submodule "workplace/user"]
 	path = workplace/user
-	url = https://github.com/DeathWish5/uCore-Tutorial-Tests
+	url = https://token:yLeME-r_AULH-CG4qheG@git.tsinghua.edu.cn/os-lab/public/ucore-tutorial-test-2022s
