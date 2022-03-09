@@ -10,6 +10,7 @@ EXPECTED += [
 
 TEMP = [
     "ch5 Usertests passed!",
+    "Test set_priority OK!",
 ]
 
 if __name__ == '__main__':
