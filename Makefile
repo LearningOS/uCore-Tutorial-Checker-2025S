@@ -18,14 +18,14 @@ ifeq ($(CHAPTER), 1)
 	echo `no ci for ch1`
 else ifeq ($(CHAPTER), 2)
 	echo `no ci for ch2`
-else ifeq ($(CHAPTER), 3)
+else ifeq ($(CHAPTER), 5)
 	make -C $(DIR) clean
-	make -C $(DIR) test CHAPTER=3 BASE=0 | tee stdout-ch3
-	python3 check/ch3.py < stdout-ch3
+	make -C $(DIR) test CHAPTER=5 BASE=0 | tee stdout-ch5
+	python3 check/ch5.py < stdout-ch5
 
 	make -C $(DIR) clean
-	make -C $(DIR) test CHAPTER=3t BASE=0 | tee stdout-ch3t
-	python3 check/ch3t.py < stdout-ch3t
+	make -C $(DIR) test CHAPTER=5t BASE=0 | tee stdout-ch5t
+	python3 check/ch5t.py < stdout-ch5t
 else
 	make -C $(DIR) clean
 	make -C $(DIR) test CHAPTER=$(CHAPTER) BASE=0 INIT_PROC=ch$(CHAPTER)_usertest | tee stdout-ch$(CHAPTER)
