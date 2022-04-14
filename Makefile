@@ -24,7 +24,7 @@ else ifeq ($(CHAPTER), 5)
 	python3 check/ch5.py < stdout-ch5
 
 	make -C $(DIR) clean
-	make -C $(DIR) test CHAPTER=5t BASE=0 INIT_PROC=ch5t_stride0 | tee stdout-ch5t
+	make -C $(DIR) test CHAPTER=5t BASE=0 INIT_PROC=ch5t_usertest | tee stdout-ch5t
 	python3 check/ch5t.py < stdout-ch5t
 else
 	make -C $(DIR) clean
