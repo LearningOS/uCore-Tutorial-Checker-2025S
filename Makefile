@@ -1,6 +1,20 @@
 RAND := $(shell awk 'BEGIN{srand();printf("%d", 65536*rand())}')
 DIR := workplace
 
+ifeq ($(CHAPTER), 3)
+	LAB := 1
+else ifeq ($(CHAPTER), 4)
+	LAB := 2
+else ifeq ($(CHAPTER), 5)
+	LAB := 3
+else ifeq ($(CHAPTER), 6)
+	LAB := 4
+else ifeq ($(CHAPTER), 7)
+	LAB := 4
+else ifeq ($(CHAPTER), 8)
+	LAB := 5
+endif
+
 randomize:
 	find $(DIR)/user/src -name "*.c" | xargs sed -i 's/OK/OK$(RAND)/g'
 	find check -name "*.py" | xargs sed -i 's/OK/OK$(RAND)/g'
@@ -14,7 +28,7 @@ ifeq ($(CHAPTER), 7)
 	mkdir -p $(DIR)/nfs
 	cp ../nfs/* $(DIR)/nfs/
 endif
-ifeq ($(CHAPTER), 1)	
+ifeq ($(CHAPTER), 1)
 	echo `no ci for ch1`
 else ifeq ($(CHAPTER), 2)
 	echo `no ci for ch2`
@@ -30,20 +44,6 @@ else
 	make -C $(DIR) clean
 	make -C $(DIR) test CHAPTER=$(CHAPTER) BASE=0 INIT_PROC=ch$(CHAPTER)_usertest | tee stdout-ch$(CHAPTER)
 	python3 check/ch$(CHAPTER).py < stdout-ch$(CHAPTER)
-endif
-
-ifeq ($(CHAPTER), 3)
-	LAB := 1
-else ifeq ($(CHAPTER), 4)
-	LAB := 2
-else ifeq ($(CHAPTER), 5)
-	LAB := 3
-else ifeq ($(CHAPTER), 6)
-	LAB := 4
-else ifeq ($(CHAPTER), 7)
-	LAB := 4
-else ifeq ($(CHAPTER), 8)
-	LAB := 5
 endif
 
 ifdef LAB
