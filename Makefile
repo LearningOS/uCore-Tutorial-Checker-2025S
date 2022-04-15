@@ -37,13 +37,10 @@ ifeq ($(CHAPTER), 3)
 else ifeq ($(CHAPTER), 4)
 	LAB := 2
 else ifeq ($(CHAPTER), 5)
-	INITPROC := ch5_usertest
 	LAB := 3
 else ifeq ($(CHAPTER), 6)
-	INITPROC := ch6_usertest
 	LAB := 4
 else ifeq ($(CHAPTER), 7)
-	INITPROC := ch7_usertest
 	LAB := 4
 else ifeq ($(CHAPTER), 8)
 	LAB := 5
