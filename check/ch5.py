@@ -7,10 +7,10 @@ EXPECTED += [
     "Test ppid OK!",
     "Test waitpid OK!",
 ]
-
-DONOTTEST = [
+EXPECTED = list(set(EXPECTED) - set([
     "Test task info OK!",
-]
+
+]))
 
 TEMP = [
     "ch5 Usertests passed!",
@@ -18,4 +18,4 @@ TEMP = [
 ]
 
 if __name__ == '__main__':
-    base.test(list(set(EXPECTED + TEMP) - set(DONOTTEST)), NOT_EXPECTED)
+    base.test(EXPECTED + TEMP, NOT_EXPECTED)
