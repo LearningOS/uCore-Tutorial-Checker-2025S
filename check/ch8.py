@@ -14,4 +14,4 @@ EXPECTED = [
 ]
 
 if __name__ == '__main__':
-    base.test(EXPECTED + TEMP, NOT_EXPECTED)
+    base.test(EXPECTED, [])
