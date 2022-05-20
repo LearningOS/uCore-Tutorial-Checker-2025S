@@ -8,6 +8,7 @@ EXPECTED = [
   "test_condvar passed!",
   "threads test passed!",
   "threads with arg test passed!",
+  "philosopher dining problem with mutex passed!",
   "deadlock test mutex 1 OK!",
   "deadlock test semaphore 1 OK!",
   "deadlock test semaphore 2 OK!",
