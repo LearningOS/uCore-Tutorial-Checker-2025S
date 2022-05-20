@@ -23,8 +23,8 @@ test: randomize
 	mkdir -p $(DIR)/os
 	cp ../os/* $(DIR)/os/
 	cp overwrite/Makefile $(DIR)/Makefile
-ifeq ($(CHAPTER), 6)
-	cp overwrite/Makefile-ch6 $(DIR)/Makefile
+ifeq ($(shell test $(CHAPTER) -ge 6; echo $$?),0)
+	cp overwrite/Makefile-nfs $(DIR)/Makefile
 	mkdir -p $(DIR)/nfs
 	cp ../nfs/* $(DIR)/nfs/
 endif

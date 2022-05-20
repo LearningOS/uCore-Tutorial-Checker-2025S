@@ -9,7 +9,6 @@ EXPECTED += [
 ]
 EXPECTED = list(set(EXPECTED) - set([
     "Test task info OK!",
-
 ]))
 
 TEMP = [
