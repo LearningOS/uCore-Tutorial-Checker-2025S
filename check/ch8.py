@@ -12,7 +12,7 @@ Test hello_world OK!""",
     "forktest0 pass.",
     "forktest1 pass.",
     "forktest2 test passed!",
-    r"Test getpid OK! pid = (\d+), ppid = (\d+)"
+    r"Test getpid OK! pid = (\d+), ppid = (\d+)",
     "mpsc_sem passed!",
     "filetest passed.",
     "race adder blocking mutex passed!",
