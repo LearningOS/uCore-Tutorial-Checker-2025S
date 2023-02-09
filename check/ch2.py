@@ -1,8 +1,11 @@
 import base
 
 EXPECTED = [
+    # ch2b_hello_world.c
     """Hello world from user mode program!
 Test hello_world OK!""",
+
+    # ch2b_power.c
     """Test power OK!""",
 ]
 

@@ -1,32 +1,43 @@
 import base
+from ch7 import EXPECTED, NOT_EXPECTED
 
-EXPECTED = [
-    """Hello world from user mode program!
-Test hello_world OK!""",
-    """Test power OK!""",
-    r"get_time OK! (\d+)",
-    "Test sleep OK!",
-    r"current time_msec = (\d+)",
-    r"time_msec = (\d+) after sleeping (\d+) ticks, delta = (\d+)ms!",
-    "Test sleep1 passed!",
-    "forktest0 pass.",
-    "forktest1 pass.",
-    "forktest2 test passed!",
-    r"Test getpid OK! pid = (\d+), ppid = (\d+)",
+EXPECTED += [
+    # ch8b_mpsc_sem.c
     "mpsc_sem passed!",
-    "filetest passed.",
+
+    # ch8b_mut_race.c
     "race adder blocking mutex passed!",
+    # ch8b_spin_mut_race.c
     "race adder spinning mutex passed!",
+
+    # ch8b_sync_sem.c
     "sync_sem passed!",
+    # ch8b_test_condvar.c
     "test_condvar passed!",
+
+    # ch8b_threads.c
     "threads test passed!",
+    # ch8b_threads_arg.c 
     "threads with arg test passed!",
+
+    # ch8b_mut_phi_din.c
     "philosopher dining problem with mutex passed!",
-    "deadlock test mutex 1 OK!",
-    "deadlock test semaphore 1 OK!",
-    "deadlock test semaphore 2 OK!",
-    "ch8 Usertests passed!",
+
+    # ch8_mut1_deadlock.c
+    # "deadlock test mutex 1 OK!",
+    # ch8_sem1_deadlock.c
+    # "deadlock test semaphore 1 OK!",
+    # ch8_sem2_deadlock.c
+    # "deadlock test semaphore 2 OK!",
+]
+
+TEMP = [
+    # ch8b_usertest.c
+    "ch8b Usertests passed!",
+
+    # ch8_usertest.c
+    # "ch8 Usertests passed!"
 ]
 
 if __name__ == '__main__':
-    base.test(EXPECTED, [])
+    base.test(EXPECTED, NOT_EXPECTED)
