@@ -1,7 +1,9 @@
 RAND := $(shell awk 'BEGIN{srand();printf("%d", 65536*rand())}')
 DIR := workplace
 
-ifeq ($(CHAPTER), 3)
+ifndef GITHUB_ACTIONS
+# do not define LAB in github action
+else ifeq ($(CHAPTER), 3)
 	LAB := 1
 else ifeq ($(CHAPTER), 4)
 	LAB := 2
