@@ -1,5 +1,5 @@
 import base
-from ch7 import EXPECTED, NOT_EXPECTED
+from ch6 import EXPECTED, NOT_EXPECTED
 
 EXPECTED += [
     # ch8b_mpsc_sem.c

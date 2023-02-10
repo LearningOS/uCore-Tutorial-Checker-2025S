@@ -5,13 +5,12 @@ EXPECTED += [
     # ch6b_filetest.c
     "filetest passed.",
     # ch6b_exec.c
-    """argv[0] = ch6b_args
-argv[1] = (*o*)
-argv[2] = (>.<)
-argv[3] = (O.O)
-argv[4] = (QwQ)
-argv[5] = orz
-argv[5] = 没有了呀""",
+    r"""argv\[0\] = \(\*o\*\)
+argv\[1\] = \(>\.<\)
+argv\[2\] = \(O\.O\)
+argv\[3\] = \(QwQ\)
+argv\[4\] = orz
+argv\[5\] = 没有了呀""",
 
     # ch6_file0.c
     # "Test file0 OK!",

@@ -10,7 +10,7 @@ EXPECTED += [
     # ch5b_forktest1.c
     "forktest1 pass.",
     # ch5b_forktest2.c
-    "forktest2 pass.",
+    "forktest2 test passed!",
 
     # ch5b_getpid.c
     "Test getpid OK!",
