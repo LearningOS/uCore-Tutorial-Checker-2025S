@@ -1,43 +1,22 @@
 import base
-from ch7 import EXPECTED, NOT_EXPECTED
+from ch8b import EXPECTED_8b, NOT_EXPECTED
+from ch7 import EXPECTED_UNTIL_7
 
-EXPECTED += [
-    # ch8b_mpsc_sem.c
-    "mpsc_sem passed!",
-
-    # ch8b_mut_race.c
-    "race adder blocking mutex passed!",
-    # ch8b_spin_mut_race.c
-    "race adder spinning mutex passed!",
-
-    # ch8b_sync_sem.c
-    "sync_sem passed!",
-    # ch8b_test_condvar.c
-    "test_condvar passed!",
-
-    # ch8b_threads.c
-    "threads test passed!",
-    # ch8b_threads_arg.c 
-    "threads with arg test passed!",
-
-    # ch8b_mut_phi_din.c
-    "philosopher dining problem with mutex passed!",
-
+EXPECTED_8 = EXPECTED_8b + [
     # ch8_mut1_deadlock.c
-    # "deadlock test mutex 1 OK!",
+    "deadlock test mutex 1 OK!",
     # ch8_sem1_deadlock.c
-    # "deadlock test semaphore 1 OK!",
+    "deadlock test semaphore 1 OK!",
     # ch8_sem2_deadlock.c
-    # "deadlock test semaphore 2 OK!",
+    "deadlock test semaphore 2 OK!",
 ]
 
-TEMP = [
-    # ch8b_usertest.c
-    "ch8b Usertests passed!",
+EXPECTED_UNTIL_8 = EXPECTED_UNTIL_7 + EXPECTED_8
 
+TEMP = [
     # ch8_usertest.c
-    # "ch8 Usertests passed!"
+    "ch8 Usertests passed!"
 ]
 
 if __name__ == '__main__':
-    base.test(EXPECTED, NOT_EXPECTED)
+    base.test(EXPECTED_UNTIL_8 + TEMP, NOT_EXPECTED)

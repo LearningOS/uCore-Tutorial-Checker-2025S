@@ -1,30 +1,13 @@
 import base
-from ch2 import EXPECTED, NOT_EXPECTED, TEMP
+from ch2b import EXPECTED_2b
+from ch3b import EXPECTED_3b, NOT_EXPECTED, TEMP
 
-EXPECTED += [
-    # ch3b_sleep.c
-    r"get_time OK! (\d+)",
-    "Test sleep OK!",
-
-    # ch3b_sleep1.c
-    r"current time_msec = (\d+)",
-    r"time_msec = (\d+) after sleeping (\d+) ticks, delta = (\d+)ms!",
-    "Test sleep1 passed!",
-
+EXPECTED_3 = EXPECTED_3b + [
     # ch3_taskinfo.c
-    # "Test task info OK!",
+    "Test task info OK!",
 ]
 
-EXPECTED += [
-    # ch3b_yield0.c
-    "Test write A OK!",
-
-    # ch3b_yield2.c
-    "Test write B OK!",
-
-    # ch3b_yield1.c
-    "Test write C OK!",
-]
+EXPECTED_UNTIL_3 = EXPECTED_2b + EXPECTED_3
 
 if __name__ == '__main__':
-    base.test(EXPECTED + TEMP, NOT_EXPECTED)
+    base.test(EXPECTED_UNTIL_3 + TEMP, NOT_EXPECTED)

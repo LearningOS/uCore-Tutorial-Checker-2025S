@@ -1,18 +1,12 @@
 import base
-from ch6 import EXPECTED, NOT_EXPECTED
+from ch7b import EXPECTED_7b, NOT_EXPECTED
+from ch6 import EXPECTED_UNTIL_6
 
-EXPECTED += [
-    # ch7b_pipetest.c
-    "Read OK, child process exited!",
-    "pipetest passed!",
+# No task in ch7
+EXPECTED_7 = EXPECTED_7b + [
 ]
 
-TEMP = [
-    # ch7b_usertest.c
-    "ch7b Usertests passed!",
-
-]
-
+EXPECTED_UNTIL_7 = EXPECTED_UNTIL_6 + EXPECTED_7
 
 if __name__ == '__main__':
-    base.test(EXPECTED + TEMP, NOT_EXPECTED)
+    base.test(EXPECTED_UNTIL_7, NOT_EXPECTED)

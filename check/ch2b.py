@@ -1,6 +1,6 @@
 import base
 
-EXPECTED = [
+EXPECTED_2b = [
     # ch2b_hello_world.c
     """Hello world from user mode program!
 Test hello_world OK!""",
@@ -17,4 +17,4 @@ NOT_EXPECTED = [
 ]
 
 if __name__ == '__main__':
-    base.test(EXPECTED + TEMP, NOT_EXPECTED)
+    base.test(EXPECTED_2b + TEMP, NOT_EXPECTED)
