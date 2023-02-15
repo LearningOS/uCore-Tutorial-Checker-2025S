@@ -3,7 +3,7 @@ import re
 
 
 def test(expected, not_expected=[]):
-    output = sys.stdin.read(1000000)
+    output = sys.stdin.buffer.read(1000000).decode(errors='ignore')
 
     count = 0
     total = len(expected) + len(not_expected)

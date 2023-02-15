@@ -7,6 +7,7 @@ ifeq ($(TOKEN_SHA1), 5d614163ddd6d7fec75881c9307a8512e355d9b6)
 	BASE := 1
 	BASE_CHAR := b
 else
+	BASE := 0
 # For students, report will be counted in to pass the CI
 	ifeq ($(CHAPTER), 3)
 		LAB := 1
@@ -45,7 +46,7 @@ else ifeq ($(CHAPTER), 2)
 else ifeq ($(CHAPTER), 5)
 	make -C $(DIR) clean
 	make -C $(DIR) test CHAPTER=5 BASE=$(BASE) INIT_PROC=ch5b_usertest | tee stdout-ch5
-	python3 check/ch5.py < stdout-ch5
+	python3 check/ch5$(BASE_CHAR).py < stdout-ch5
 
 ifndef BASE
 	make -C $(DIR) clean
@@ -56,7 +57,7 @@ endif
 else
 	make -C $(DIR) clean
 	make -C $(DIR) test CHAPTER=$(CHAPTER) BASE=$(BASE) INIT_PROC=ch$(CHAPTER)$(BASE_CHAR)_usertest | tee stdout-ch$(CHAPTER)
-	python3 check/ch$(CHAPTER).py < stdout-ch$(CHAPTER)
+	python3 check/ch$(CHAPTER)$(BASE_CHAR).py < stdout-ch$(CHAPTER)
 endif
 
 ifdef LAB
