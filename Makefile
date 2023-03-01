@@ -45,7 +45,7 @@ else ifeq ($(CHAPTER), 2)
 	echo `no ci for ch2`
 else ifeq ($(CHAPTER), 5)
 	make -C $(DIR) clean
-	make -C $(DIR) test CHAPTER=5 BASE=$(BASE) INIT_PROC=ch5b_usertest | tee stdout-ch5
+	make -C $(DIR) test CHAPTER=5 BASE=$(BASE) INIT_PROC=ch5$(BASE_CHAR)_usertest | tee stdout-ch5
 	python3 check/ch5$(BASE_CHAR).py < stdout-ch5
 
 ifndef BASE
