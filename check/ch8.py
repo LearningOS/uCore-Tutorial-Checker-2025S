@@ -1,6 +1,6 @@
 import base
 from ch8b import EXPECTED_8b, NOT_EXPECTED
-from ch7 import EXPECTED_UNTIL_7
+from ch7b import EXPECTED_UNTIL_7b
 
 EXPECTED_8 = EXPECTED_8b + [
     # ch8_mut1_deadlock.c
@@ -11,7 +11,7 @@ EXPECTED_8 = EXPECTED_8b + [
     "deadlock test semaphore 2 OK!",
 ]
 
-EXPECTED_UNTIL_8 = EXPECTED_UNTIL_7 + EXPECTED_8
+EXPECTED_UNTIL_8 = EXPECTED_UNTIL_7b + EXPECTED_8
 
 TEMP = [
     # ch8_usertest.c
