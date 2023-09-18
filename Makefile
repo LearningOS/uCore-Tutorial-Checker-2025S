@@ -2,7 +2,7 @@ RAND := $(shell awk 'BEGIN{srand();printf("%d", 65536*rand())}')
 DIR := workplace
 
 # This is only for TAs to run base test, students do not know the token
-TOKEN_SHA1 := $(shell echo -n '$(passwd)' | sha1sum | awk -F' ' '{ print $$1 }' | xargs)
+TOKEN_SHA1 := $(shell echo -n '$(passwd)' | sha1sum | xargs | awk -F' ' '{ print $$1 }')
 ifeq ($(TOKEN_SHA1), cb7997e364d3af0192a37edebaf166c0ecf10454)
 	BASE := 1
 	BASE_CHAR := b
