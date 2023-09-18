@@ -27,8 +27,8 @@ else
 endif
 
 randomize:
-	find $(DIR)/user/src -name "*.c" | xargs sed -i 's/OK/OK$(RAND)/g'
-	find check -name "*.py" | xargs sed -i 's/OK/OK$(RAND)/g'
+	find $(DIR)/user/src -name "*.c" | xargs -I {} sh -c 'sed -i.bak 's/OK/OK$(RAND)/g' {} && rm -rf {}.bak'
+	find check -name "*.py" | xargs -I {} sh -c 'sed -i.bak 's/OK/OK$(RAND)/g' {} && rm -rf {}.bak'
 
 test: randomize
 	mkdir -p $(DIR)/os
