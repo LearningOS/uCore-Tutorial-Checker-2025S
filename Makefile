@@ -3,7 +3,7 @@ DIR := workplace
 
 # This is only for TAs to run base test, students do not know the token
 TOKEN_SHA1 := $(shell echo -n '$(passwd)' | sha1sum | xargs | awk -F' ' '{ print $$1 }')
-ifeq ($(TOKEN_SHA1), c4b6163b043b433fb9c6a3a508a9afbf67146849)
+ifeq ($(TOKEN_SHA1), 3d95c23bbc8fa7540096eb11aa094621c28f9358)
 	BASE := 1
 	BASE_CHAR := b
 else
