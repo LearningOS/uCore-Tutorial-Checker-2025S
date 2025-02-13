@@ -12,6 +12,8 @@ EXPECTED_4 = [
     "Test 04_4 ummap OK!",
     # ch4_unmap1.c
     "Test 04_5 ummap2 OK!",
+    # ch4_trace1.c
+    "Test trace_1 OK!",
 ]
 
 EXPECTED_UNTIL_4 = EXPECTED_UNTIL_3 + EXPECTED_4

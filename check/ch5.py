@@ -13,8 +13,9 @@ EXPECTED_5 = EXPECTED_5b + [
 ]
 
 EXPECTED_UNTIL_5 = EXPECTED_UNTIL_4 + EXPECTED_5
-# Task info should be removed becase assert(info.time < t3 - t1 + 100); may fail
-EXPECTED_UNTIL_5.remove("Test task info OK!")
+EXPECTED_UNTIL_5.remove("string from task trace test")
+EXPECTED_UNTIL_5.remove("Test trace OK!")
+EXPECTED_UNTIL_5.remove("Test trace_1 OK!")
 
 TEMP = [
     # ch5_usertest.c

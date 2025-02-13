@@ -3,8 +3,9 @@ from ch2b import EXPECTED_2b
 from ch3b import EXPECTED_3b, NOT_EXPECTED, TEMP
 
 EXPECTED_3 = EXPECTED_3b + [
-    # ch3_taskinfo.c
-    "Test task info OK!",
+    # ch3_trace.c
+    "string from task trace test",
+    "Test trace OK!",
 ]
 
 EXPECTED_UNTIL_3 = EXPECTED_2b + EXPECTED_3
